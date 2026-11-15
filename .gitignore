@@ -1,0 +1,11 @@
+# Build
+build/
+
+# Qt
+.qt/
+
+# IDE
+.vscode/
+
+# Sistema operacional
+.DS_Store
