@@ -7,5 +7,10 @@ build/
 # IDE
 .vscode/
 
-# Sistema operacional
+# SO
 .DS_Store
+
+#Images
+*.dcm
+*:Zone.Identifier
+*.png
