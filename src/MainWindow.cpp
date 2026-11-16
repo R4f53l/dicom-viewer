@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     auto *centralWidget = new QWidget(this); 
     auto *layout = new QVBoxLayout(centralWidget); 
 
-    m_button = new QPushButton("Abrir arquivo DICOM (.dcm)", centralWidget);
+    m_button = new QPushButton("CLIQUE para abrir arquivo DICOM (.dcm)", centralWidget);
     m_imagelabel = new QLabel ("Selecione um arquivo DICOM para visualizar", centralWidget); 
     m_imagelabel -> setAlignment(Qt::AlignCenter); 
     m_imagelabel -> setMinimumSize(400, 300); 
@@ -32,7 +32,7 @@ void MainWindow::resizeEvent(QResizeEvent *event){
 
 void MainWindow::onOpenFileClicked(){
     QString filepath = QFileDialog::getOpenFileName(
-        this, "Selecionar DICOM", "Arquivos DICOM (*.dcm);;Todos os Arquivos (*)"); 
+        this, "Selecionar DICOM", "", "Arquivos DICOM (*.dcm);;Todos os Arquivos (*)"); 
     
     if(filepath.isEmpty())
         return; 
