@@ -12,7 +12,9 @@ A arquitetura foi dividida em duas camadas principais, separando o processamento
 
 ## Bibliotecas Utilizadas
 
-- **Qt 6 (`Qt6::Widgets`):** Interface gráfica, gerenciamento de janelas e manipulação de imagens (`QImage`, `QPixmap`).
+- **Qt 6 (Widgets e Gui):** Desenvolvimento da interface gráfica,
+  gerenciamento de janelas, layouts, diálogos, eventos e manipulação
+  e exibição de imagens (`QImage`, `QPixmap`, `QLabel`, `QFileDialog`, `QMessageBox`, etc).
 - **DCMTK (`libdcmtk-dev`):** Leitura de arquivos DICOM, decodificação JPEG/RLE (`dcmjpeg`, `dcrledrg`) e processamento de janela e contraste (`DicomImage`).
 
 ### Ferramentas e Padrões
