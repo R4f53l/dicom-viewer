@@ -8,7 +8,7 @@ A arquitetura foi dividida em duas camadas principais, separando o processamento
 
 - **`DicomLoader` (`src/DicomLoader.h`, `src/DicomLoader.cpp`):** Encapsula a biblioteca DCMTK. Realiza o registro dos codecs de descompressão JPEG e RLE, valida a integridade do arquivo, aplica a normalização automática de brilho e contraste (`setMinMaxWindow`), converte os pixels para 8 bits em escala de cinza (`Format_Grayscale8`) ou RGB (`Format_RGB888`) e realiza a cópia dos dados para a memória gerenciada pelo Qt (`QImage`).
 
-- **`MainWindow` (`src/MainWindow.h`, `src/MainWindow.cpp`):** Gerencia a interface gráfica utilizando Qt Widgets. Permite a seleção de arquivos por meio de `QFileDialog`, a exibição responsiva da imagem (`QLabel` + `QPixmap`), com preservação da proporção durante o redimensionamento da janela (`resizeEvent`), e o tratamento visual de erros para arquivos inválidos ou corrompidos (`QMessageBox`).
+- **`MainWindow` (`src/MainWindow.h`, `src/MainWindow.cpp`):** Gerencia a interface gráfica utilizando Qt Widgets. Permite a seleção de arquivos através do `QFileDialog`, tendo exibição responsiva da imagem (`QLabel` + `QPixmap`), com preservação da proporção durante o redimensionamento da janela (`resizeEvent`), e o tratamento visual de erros para arquivos inválidos ou corrompidos (`QMessageBox`).
 
 ## Bibliotecas Utilizadas
 

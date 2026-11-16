@@ -5,7 +5,7 @@
 struct DicomLoadResult{
     bool success = false; 
     QImage image; 
-    QString errorMessage; 
+    QString errorMessage;    
 }; 
 
 class DicomLoader{

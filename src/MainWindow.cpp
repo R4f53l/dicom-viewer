@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     resize(800, 600); 
 
     auto *centralWidget = new QWidget(this); 
-    auto *layout = new QVBoxLayout(centralWidget); 
-
+    auto *layout = new QVBoxLayout(centralWidget);     
     m_button = new QPushButton("CLIQUE para abrir arquivo DICOM (.dcm)", centralWidget);
     m_imagelabel = new QLabel ("Selecione um arquivo DICOM para visualizar", centralWidget); 
     m_imagelabel -> setAlignment(Qt::AlignCenter); 
