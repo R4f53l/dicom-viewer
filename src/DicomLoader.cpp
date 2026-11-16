@@ -2,6 +2,7 @@
 #include <dcmtk/dcmjpeg/djdecode.h>  
 #include <dcmtk/dcmdata/dcrledrg.h>
 #include <dcmtk/dcmimgle/dcmimage.h>
+#include <dcmtk/dcmimage/diregist.h>
 #include <QFile>
 #include <memory>
 
@@ -10,7 +11,7 @@ DicomLoadResult DicomLoader::loadImageFromFile (const QString &filepath){
     static bool codecsRegistered = false; 
     if(!codecsRegistered){
         DJDecoderRegistration::registerCodecs();  
-        DcmRLEDecoderRegistration::registerCodecs(); 
+        DcmRLEDecoderRegistration::registerCodecs();        
         codecsRegistered = true; 
     }
     
@@ -22,13 +23,13 @@ DicomLoadResult DicomLoader::loadImageFromFile (const QString &filepath){
         return result; 
     }
 
-    /*if(!dcmImage->isMonochrome()){
-        result.errorMessage = "A imagem nao possui tons monocromaticos!"; 
-        return result; 
-    }*/
+    auto isMono = dcmImage->isMonochrome(); 
 
-    //normaliza de 0 a 255; 
-    dcmImage->setMinMaxWindow(); 
+    if(isMono){    
+        //normaliza de 0 a 255; 
+        dcmImage->setMinMaxWindow();     
+    }
+    
 
     const int width = static_cast<int>(dcmImage -> getWidth()); 
     const int height = static_cast<int> (dcmImage -> getHeight()); 
@@ -40,7 +41,9 @@ DicomLoadResult DicomLoader::loadImageFromFile (const QString &filepath){
         return result; 
     }
 
-    QImage Image(pixelData, width, height, width, QImage::Format_Grayscale8);     
+    const auto bytesperline = isMono? width: 3 * width; 
+    QImage::Format format = isMono? QImage::Format_Grayscale8 : QImage::Format_RGB888; 
+    QImage Image(pixelData, width, height, bytesperline, format);     
     result.image = Image.copy(); 
     result.success = true; 
 
