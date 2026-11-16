@@ -20,7 +20,7 @@ private slots:
 private: 
     void updateImageDisplay(); 
     QPushButton *m_button = nullptr; 
-    QLabel *m_imagelabel = nullptr; 
-    QPixmap m_currpixmap; 
+    QLabel *m_imagelabel = nullptr, *m_metadatalabel = nullptr;  
+    QPixmap m_currpixmap;     
 }; 
 

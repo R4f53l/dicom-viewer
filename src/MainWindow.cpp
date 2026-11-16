@@ -8,7 +8,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Visualizador DICOM"); 
-    resize(800, 600); 
+    resize(800, 600);     
 
     auto *centralWidget = new QWidget(this); 
     auto *layout = new QVBoxLayout(centralWidget);     
@@ -16,9 +16,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     m_imagelabel = new QLabel ("Selecione um arquivo DICOM para visualizar", centralWidget); 
     m_imagelabel -> setAlignment(Qt::AlignCenter); 
     m_imagelabel -> setMinimumSize(400, 300); 
-    
+    m_metadatalabel = new QLabel("Nenhum arquivo carregado", centralWidget); 
+    m_metadatalabel -> setAlignment(Qt::AlignCenter); 
+    m_metadatalabel -> setWordWrap(true); 
+    m_metadatalabel -> setStyleSheet(
+        "QLabel {"
+        "   background-color: #1e293b;"
+        "   color: #f8fafc;"
+        "   padding: 4px 10px;"
+        "   border-radius: 4px;"
+        "   font-weight: bold;"
+        "   font-size: 11px;"
+        "}"
+    );
     layout -> addWidget(m_button); 
     layout -> addWidget(m_imagelabel, 1); 
+    layout -> addWidget(m_metadatalabel); 
     setCentralWidget(centralWidget); 
 
     connect(m_button, &QPushButton::clicked, this, &MainWindow::onOpenFileClicked);
@@ -26,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
 void MainWindow::resizeEvent(QResizeEvent *event){
     QMainWindow::resizeEvent(event); 
-    updateImageDisplay(); 
+    updateImageDisplay();     
 }
 
 void MainWindow::onOpenFileClicked(){
@@ -46,6 +59,7 @@ void MainWindow::onOpenFileClicked(){
     m_currpixmap = QPixmap::fromImage(result.image); 
 
     updateImageDisplay(); 
+    m_metadatalabel->setText(result.metaDataText);
 }
 
 void MainWindow::updateImageDisplay(){

@@ -1,14 +1,14 @@
 # Visualizador DICOM com Qt e C++
 
-Aplicação desktop desenvolvida em C++17 utilizando Qt 6 Widgets e DCMTK para leitura, descompressão e visualização de imagens médicas no formato DICOM (`.dcm`).
+Aplicação desktop desenvolvida em C++17 utilizando Qt 6 Widgets e DCMTK para leitura, descompressão e visualização de imagens médicas com seus respectivos metadados associados no formato DICOM (`.dcm`).
 
 ## Descrição da Solução
 
 A arquitetura foi dividida em duas camadas principais, separando o processamento dos dados médicos da interface gráfica.
 
-- **`DicomLoader` (`src/DicomLoader.h`, `src/DicomLoader.cpp`):** Encapsula a biblioteca DCMTK. Realiza o registro dos codecs de descompressão JPEG e RLE, valida a integridade do arquivo, aplica a normalização automática de brilho e contraste (`setMinMaxWindow`), converte os pixels para 8 bits em escala de cinza (`Format_Grayscale8`) ou RGB (`Format_RGB888`) e realiza a cópia dos dados para a memória gerenciada pelo Qt (`QImage`).
+- **`DicomLoader` (`src/DicomLoader.h`, `src/DicomLoader.cpp`):** Encapsula a biblioteca DCMTK. Realiza o registro dos codecs de descompressão JPEG e RLE, valida a integridade do arquivo, aplica a normalização automática de brilho e contraste (`setMinMaxWindow`), converte os pixels para 8 bits em escala de cinza (`Format_Grayscale8`) ou RGB (`Format_RGB888`), extrai os metadados da imagem utilizando DcmFileFormat e realiza a cópia dos dados para a memória gerenciada pelo Qt(`QImage`), através do método copy().
 
-- **`MainWindow` (`src/MainWindow.h`, `src/MainWindow.cpp`):** Gerencia a interface gráfica utilizando Qt Widgets. Permite a seleção de arquivos através do `QFileDialog`, tendo exibição responsiva da imagem (`QLabel` + `QPixmap`), com preservação da proporção durante o redimensionamento da janela (`resizeEvent`), e o tratamento visual de erros para arquivos inválidos ou corrompidos (`QMessageBox`).
+- **`MainWindow` (`src/MainWindow.h`, `src/MainWindow.cpp`):** Gerencia a interface gráfica utilizando Qt Widgets. Permite a seleção de arquivos através do `QFileDialog`, tendo exibição responsiva da imagem (`QLabel` + `QPixmap`) e seus metadados, com preservação da proporção durante o redimensionamento da janela (`resizeEvent`), e o tratamento visual de erros para arquivos inválidos ou corrompidos (`QMessageBox`).
 
 ## Bibliotecas Utilizadas
 
