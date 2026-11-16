@@ -1,17 +1,11 @@
 #include <QApplication>
-#include <QPushButton>
-#include <QLabel>
-#include <dcmtk/dcmimgle/dcmimage.h>
+#include "MainWindow.h"
 
 int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);    
-    QLabel label("Qt + DCMTK funcionando no WSL!");
-    label.resize(400, 200);
-    label.setAlignment(Qt::AlignCenter);
-    label.show();
-
+    QApplication app(argc, argv); 
     
-    
+    MainWindow window; 
+    window.show(); 
 
-    return app.exec();
+    app.exec();
 }

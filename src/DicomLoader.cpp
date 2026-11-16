@@ -1,8 +1,8 @@
 #include "DicomLoader.h"
-
 #include <dcmtk/dcmjpeg/djdecode.h>  
 #include <dcmtk/dcmdata/dcrledrg.h>
 #include <dcmtk/dcmimgle/dcmimage.h>
+#include <QFile>
 #include <memory>
 
 DicomLoadResult DicomLoader::loadImageFromFile (const QString &filepath){
@@ -15,7 +15,7 @@ DicomLoadResult DicomLoader::loadImageFromFile (const QString &filepath){
     }
     
     DicomLoadResult result;     
-    auto dcmImage = std::make_unique<DicomImage>(filepath.toStdString().c_str());
+    auto dcmImage = std::make_unique<DicomImage>(QFile::encodeName(filepath).constData());
 
     if(!dcmImage || dcmImage->getStatus() != EIS_Normal){
         result.errorMessage = "Nao foi possivel ler o arquivo DICOM!"; 

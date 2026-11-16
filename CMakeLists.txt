@@ -11,7 +11,10 @@ find_package(DCMTK REQUIRED)
 
 add_executable(dicom-viewer
     src/main.cpp
+    src/DicomLoader.h
     src/DicomLoader.cpp
+    src/MainWindow.h
+    src/MainWindow.cpp
 )
 
 target_link_libraries(dicom-viewer PRIVATE
